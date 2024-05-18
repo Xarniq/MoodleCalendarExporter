@@ -1,3 +1,9 @@
+"""
+Author : Xarnia
+Last Modified : 18/05/2024
+Project : MoodleCalendarExporter
+"""
+
 class MoodleErrors(Exception):
     
     def __init__(self, msg=None, stacktrace=None):
