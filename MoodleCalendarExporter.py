@@ -32,22 +32,26 @@ def wait_for_download(download_dir, timeout=30):
 
 class Moodle:
     
-    def __init__(self,username,password):
+    def __init__(self,username,password,url,downloadpath):
         """
         Initialise credentials for login.
 
         Args:
             username (str): username
             password (str): password
+            url (str) : url
+            downloadpath (str) : downloadpath
         """
         self.username = username
         self.password = password
+        self.url = url
+        self.downloadpath = downloadpath
     
     def Login(self):
         """
         Method which logs yourself to Moodle.
         """
-        url = "https://yourMoodleURL.com"
+        url = self.url
         self.driver.get(url)
         try:
             user = self.driver.find_element(By.XPATH, '//*[@id="username"]')
@@ -79,7 +83,7 @@ class Moodle:
             self.driver.find_element(By.XPATH,'//*[@id="id_events_exportevents_all"]').click() # Choosing options
             self.driver.find_element(By.XPATH,'//*[@id="id_period_timeperiod_monthnow"]').click() 
             self.driver.find_element(By.XPATH,'//*[@id="id_export"]').click() # Downloads the .ics
-            if wait_for_download("C:/your/path/"):
+            if wait_for_download(self.downloadpath):
                 print("Download started successfully.")
             else:
                 raise CalendarNotRetrieved("Failed to retrieve calendar data.")
@@ -103,7 +107,7 @@ class Moodle:
         time.sleep(10)
         self.driver.close()
     
-sesh = Moodle("username","password")
+sesh = Moodle("username","password","https://YourMoodle","C:/your/path/")
 sesh.Main()
 
 
