@@ -66,7 +66,7 @@ class Moodle:
         except LoginError as le:
             print("An error occurred during login:", le)
         except Exception as e:
-            # Handle other type of exceptions
+            # Handle other types of exceptions
             print("An unexpected error occurred:", e)
         
     
